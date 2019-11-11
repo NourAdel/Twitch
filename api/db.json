@@ -9,6 +9,12 @@
       "title": "other stream",
       "description": "another one",
       "id": 2
+    },
+    {
+      "title": "new stream",
+      "description": "testing user id",
+      "userId": "110188627107427172562",
+      "id": 3
     }
   ]
 }
