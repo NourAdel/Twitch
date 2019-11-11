@@ -8,7 +8,7 @@ import {
   EDIT_STREAM
 } from "./types";
 import streams from "../apis/streams";
-import history from '../history'
+import history from "../history";
 export const signIn = userId => {
   return {
     type: SIGN_IN,
@@ -22,14 +22,14 @@ export const signOut = () => {
   };
 };
 
-export const createStream = formValues => async(dispatch, getState) => {
-  const {userId} = getState().auth;
-  const response = await streams.post("/streams", {...formValues, userId});
+export const createStream = formValues => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  const response = await streams.post("/streams", { ...formValues, userId });
 
   dispatch({ type: CREATE_STREAM, payload: response.data });
   // we will force the user to go to a certain url after the success of the creation
 
-  history.push('/')
+  history.push("/");
 };
 
 export const fetchStreams = () => async dispatch => {
@@ -39,9 +39,10 @@ export const fetchStreams = () => async dispatch => {
 };
 
 export const fetchStream = id => async dispatch => {
-  const response = await streams.post(`/streams/${id}`);
+  const response = await streams.get(`/streams/${id}`);
 
   dispatch({ type: FETCH_STREAM, payload: response.data });
+
 };
 
 export const deleteStream = id => async dispatch => {
@@ -51,7 +52,9 @@ export const deleteStream = id => async dispatch => {
 };
 
 export const editStream = (id, formValues) => async dispatch => {
-  const response = await streams.put(`/streams/${id}`, formValues);
+  const response = await streams.patch (`/streams/${id}`, formValues);
 
   dispatch({ type: EDIT_STREAM, payload: response.data });
+  
+  history.push("/");
 };
