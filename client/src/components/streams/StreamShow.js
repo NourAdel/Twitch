@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import flv from "flv.js";
 import { connect } from "react-redux";
 
 import { fetchStream } from "../../actions";
 
 class StreamShow extends Component {
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
   componentDidMount() {
     this.props.fetchStream(this.props.match.params.id);
   }
@@ -13,6 +18,10 @@ class StreamShow extends Component {
     }
     return (
       <div>
+        <video ef={this.videoRef}
+        style={{width:'100%'}}
+        controls
+        />
         <h1>{this.props.stream.title}</h1>
         <h5>{this.props.stream.description}</h5>
       </div>
